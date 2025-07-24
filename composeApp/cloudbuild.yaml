@@ -1,0 +1,11 @@
+steps:
+  - name: 'gcr.io/cloud-builders/gradle'
+    entrypoint: 'bash'
+    args: ['-c', './gradlew wasmJsBrowserDistribution']
+
+  - name: 'gcr.io/firebase-ci/firebase'
+    entrypoint: 'bash'
+    args: [
+      '-c',
+      'firebase deploy --only hosting --token "$FIREBASE_TOKEN" --project "$PROJECT_ID"'
+    ]
